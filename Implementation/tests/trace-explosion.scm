@@ -1,0 +1,30 @@
+(begin (define (loop n)
+         (define g '()) ;no forward referencing
+         (define (f)
+           (if (= (random 2) 0)
+               'f0
+               'f1)
+               ;(begin (display "f 0") (newline))
+               ;(begin (display "f 1") (newline)))
+           (g))
+         (define (h)
+           (if (= (random 2) 0)
+               'h0
+               'h1)
+               ;(begin (display "h 0") (newline))
+               ;(begin (display "h 1") (newline)))
+           'h)
+         (define (gg)
+           ;(display "in g") (newline)
+           (if (= (random 2) 0)
+               'g0
+               'g1)
+               ;(begin (display "g 0") (newline))
+               ;(begin (display "g 1") (newline)))
+           (h))
+         (set! g gg)
+         (if (> n 0)
+             (begin (f)
+                    (loop (- n 1)))))
+       
+       (loop 500))
